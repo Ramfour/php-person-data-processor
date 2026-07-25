@@ -68,3 +68,34 @@ function getGenderFromName(string $fullname, array $rules): int
     }
     return $sexChar;
 }
+/**
+ * Принимает как аргумент массив людей, состоящий из полных имён и должностей. 
+ * Возвращает как результат строку с описанием соотношения полов в массиве.
+ * @var array $rules Массив правил для определения пола по имени {@see arrays.php}
+ * @param array $persons Массив людей
+ * @return string Описание соотношения полов
+ */
+function getGenderDescription(array $persons, array $rules): string
+{
+    $result = '';
+    $personsCount = count($persons);
+    $males   = array_filter($persons, fn($p) => getGenderFromName($p['fullname'], $rules) > 0);
+    $females = array_filter($persons, fn($p) => getGenderFromName($p['fullname'], $rules) < 0);
+    $unknown = array_filter($persons, fn($p) => getGenderFromName($p['fullname'], $rules) === 0);
+    $callback = function ($count) use ($personsCount) {
+        return round($count / $personsCount * 100, 1);
+    };
+    $malePercent = $callback(count($males));
+    $femalePercent = $callback(count($females));
+    $unknownPercent = $callback(count($unknown));
+    $result = <<<RESULT
+                <pre>
+                Гендерный состав аудитории: 
+                ---------------------------
+                Мужчины - {$malePercent}%
+                Женщины - {$femalePercent}%
+                Не удалось определить - {$unknownPercent}%
+                </pre>
+                RESULT;
+    return $result;
+}

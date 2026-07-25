@@ -2,7 +2,7 @@
 /**
  * @var array $example_persons_array - массив с данными о людях
  */
-$example_persons_array = [
+$examplePersonsArray = [
     [
         'fullname' => 'Иванов Иван Иванович',
         'job' => 'tester',
@@ -55,8 +55,8 @@ $example_persons_array = [
 
 $rules = [
     'surname' => [
-        'male' => ['ич'],
-        'female' => ['вна'],
+        'male' => ['в'],
+        'female' => ['ва'],
     ],
     'name' => [
         'male' => ['й', 'н'],
