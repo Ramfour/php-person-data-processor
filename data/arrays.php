@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var array $example_persons_array - массив с данными о людях
+ */
 $example_persons_array = [
     [
         'fullname' => 'Иванов Иван Иванович',
@@ -43,5 +46,24 @@ $example_persons_array = [
     [
         'fullname' => 'Шварцнегер Арнольд Густавович',
         'job' => 'babysitter',
+    ],
+];
+
+/**
+ * @var array $rules - массив правил для определения пола по имени
+ */
+
+$rules = [
+    'surname' => [
+        'male' => ['ич'],
+        'female' => ['вна'],
+    ],
+    'name' => [
+        'male' => ['й', 'н'],
+        'female' => ['а', 'я'],
+    ],
+    'patronymic' => [
+        'male' => ['ич'],
+        'female' => ['вна'],
     ],
 ];
